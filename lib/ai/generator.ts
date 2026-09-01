@@ -139,11 +139,14 @@ export function parseLinksResponse(
 export async function generateBio(keywords: string[]): Promise<string> {
   let text: string;
   try {
-    const [{ generateText }, { google }] = await Promise.all([
+    const [{ generateText }, { createGoogle }] = await Promise.all([
       import("ai"),
       import("@ai-sdk/google"),
     ]);
-    const model = google(AI_MODEL);
+    const provider = createGoogle({
+      apiKey: process.env.GEMINI_API_KEY,
+    });
+    const model = provider(AI_MODEL);
     ({ text } = await generateText({
       model,
       prompt: buildBioPrompt(keywords),
@@ -161,11 +164,14 @@ export async function generateBio(keywords: string[]): Promise<string> {
 export async function generateLinkCaptions(links: LinkSeed[]): Promise<Caption[]> {
   let text: string;
   try {
-    const [{ generateText }, { google }] = await Promise.all([
+    const [{ generateText }, { createGoogle }] = await Promise.all([
       import("ai"),
       import("@ai-sdk/google"),
     ]);
-    const model = google(AI_MODEL);
+    const provider = createGoogle({
+      apiKey: process.env.GEMINI_API_KEY,
+    });
+    const model = provider(AI_MODEL);
     ({ text } = await generateText({
       model,
       prompt: buildLinksPrompt(links),
