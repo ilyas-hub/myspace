@@ -5,6 +5,7 @@ import Image from "next/image";
 import { upload } from "@vercel/blob/client";
 import { ADMIN_SECRET_HEADER } from "@/lib/admin";
 import { PRESETS } from "@/lib/themes";
+import { validateUsername, USERNAME_ERROR_MESSAGE } from "@/lib/username";
 import { adminFetch, getAdminSecret } from "./admin-helpers";
 
 export interface ProfileDraft {
@@ -28,9 +29,17 @@ export function ProfileEditor({ profile, onSaved, onError }: Props) {
   );
   const [saving, setSaving] = useState(false);
   const [uploading, setUploading] = useState(false);
+  const [usernameError, setUsernameError] = useState<string | null>(null);
   const fileRef = useRef<HTMLInputElement>(null);
 
+  function validateUsernameField(): boolean {
+    const error = validateUsername(draft.username.trim());
+    setUsernameError(error ? USERNAME_ERROR_MESSAGE[error] : null);
+    return error === null;
+  }
+
   async function save() {
+    if (!validateUsernameField()) return;
     setSaving(true);
     try {
       const res = await adminFetch("/api/profile", {
@@ -90,11 +99,24 @@ export function ProfileEditor({ profile, onSaved, onError }: Props) {
           <span className="text-sm font-medium text-zinc-700">Username</span>
           <input
             value={draft.username}
-            onChange={(e) => setDraft({ ...draft, username: e.target.value })}
+            onChange={(e) => {
+              setDraft({ ...draft, username: e.target.value });
+              if (usernameError) setUsernameError(null);
+            }}
+            onBlur={validateUsernameField}
             disabled={Boolean(profile)}
             placeholder="e.g. alex"
-            className="mt-1 w-full rounded-lg border border-zinc-300 px-3 py-2 text-sm text-zinc-900 outline-none focus:border-zinc-500 disabled:bg-zinc-50 disabled:text-zinc-400"
+            className={`mt-1 w-full rounded-lg border px-3 py-2 text-sm text-zinc-900 outline-none focus:border-zinc-500 disabled:bg-zinc-50 disabled:text-zinc-400 ${
+              usernameError ? "border-red-300" : "border-zinc-300"
+            }`}
           />
+          {usernameError ? (
+            <p className="mt-1 text-xs text-red-600">{usernameError}</p>
+          ) : (
+            <p className="mt-1 text-xs text-zinc-400">
+              Used in your public URL — letters, numbers, . _ - only (no spaces).
+            </p>
+          )}
         </label>
 
         <label className="block">

@@ -3,6 +3,10 @@ import { dbConnect } from "@/lib/db/connect";
 import { Profile } from "@/lib/db/models";
 import { PRESET_BY_ID } from "@/lib/themes";
 import { requireAdmin } from "@/lib/admin-guard";
+import {
+  validateUsername,
+  USERNAME_ERROR_MESSAGE,
+} from "@/lib/username";
 
 export async function GET(request: NextRequest) {
   const unauthorized = requireAdmin(request);
@@ -23,9 +27,12 @@ export async function POST(request: NextRequest) {
   const body = await request.json();
   const { username, displayName, bio, avatarUrl, themeId, socials } = body;
 
-  if (!username) {
+  const usernameError = validateUsername(
+    typeof username === "string" ? username : "",
+  );
+  if (usernameError) {
     return NextResponse.json(
-      { error: "username is required" },
+      { error: USERNAME_ERROR_MESSAGE[usernameError] },
       { status: 400 },
     );
   }
@@ -78,6 +85,16 @@ export async function PATCH(request: NextRequest) {
       { error: `Invalid themeId: ${updates.themeId}` },
       { status: 400 },
     );
+  }
+
+  if (typeof updates.username === "string") {
+    const usernameError = validateUsername(updates.username);
+    if (usernameError) {
+      return NextResponse.json(
+        { error: USERNAME_ERROR_MESSAGE[usernameError] },
+        { status: 400 },
+      );
+    }
   }
 
   if (updates.username) {
