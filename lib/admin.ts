@@ -1,6 +1,7 @@
 import { timingSafeEqual } from "node:crypto";
 
 export const ADMIN_SECRET_HEADER = "x-admin-secret";
+export const ADMIN_SECRET_COOKIE = "admin_secret";
 
 export function secretsMatch(input: string, expected: string): boolean {
   const a = Buffer.from(input);

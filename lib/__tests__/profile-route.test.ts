@@ -18,7 +18,7 @@ vi.mock("@/lib/db/models", () => ({
   },
 }));
 
-import { POST, PATCH } from "@/app/api/profile/route";
+import { GET, POST, PATCH } from "@/app/api/profile/route";
 
 function req(method: string, body: Record<string, unknown>) {
   return new NextRequest("http://localhost/api/profile", {
@@ -47,6 +47,37 @@ describe("admin gate", () => {
     });
     const res = await POST(r);
     expect(res.status).toBe(401);
+  });
+});
+
+// ── GET ────────────────────────────────────────────────────────
+describe("GET /api/profile", () => {
+  it("returns 401 when secret is missing", async () => {
+    const r = new NextRequest("http://localhost/api/profile", {
+      method: "GET",
+    });
+    const res = await GET(r);
+    expect(res.status).toBe(401);
+  });
+
+  it("returns the profile when one exists", async () => {
+    mockFindOne.mockReturnValue({ lean: () => Promise.resolve({ _id: "p1", username: "alex" }) });
+
+    const res = await GET(
+      new NextRequest("http://localhost/api/profile", { headers: HEADERS }),
+    );
+    expect(res.status).toBe(200);
+    expect(await res.json()).toEqual({ _id: "p1", username: "alex" });
+  });
+
+  it("returns null when no profile exists", async () => {
+    mockFindOne.mockReturnValue({ lean: () => Promise.resolve(null) });
+
+    const res = await GET(
+      new NextRequest("http://localhost/api/profile", { headers: HEADERS }),
+    );
+    expect(res.status).toBe(200);
+    expect(await res.json()).toBeNull();
   });
 });
 

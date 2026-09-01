@@ -3,10 +3,12 @@ import { handleUpload, type HandleUploadBody } from "@vercel/blob/client";
 import { requireAdmin } from "@/lib/admin-guard";
 
 export async function POST(request: NextRequest) {
-  const unauthorized = requireAdmin(request);
-  if (unauthorized) return unauthorized;
-
   const body = (await request.json()) as HandleUploadBody;
+
+  if (body.type === "blob.generate-client-token") {
+    const unauthorized = requireAdmin(request);
+    if (unauthorized) return unauthorized;
+  }
 
   const jsonResponse = await handleUpload({
     body,

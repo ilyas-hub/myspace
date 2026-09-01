@@ -4,6 +4,16 @@ import { Profile } from "@/lib/db/models";
 import { PRESET_BY_ID } from "@/lib/themes";
 import { requireAdmin } from "@/lib/admin-guard";
 
+export async function GET(request: NextRequest) {
+  const unauthorized = requireAdmin(request);
+  if (unauthorized) return unauthorized;
+
+  await dbConnect();
+
+  const profile = await Profile.findOne().lean();
+  return NextResponse.json(profile ?? null);
+}
+
 export async function POST(request: NextRequest) {
   const unauthorized = requireAdmin(request);
   if (unauthorized) return unauthorized;
