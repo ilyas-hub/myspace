@@ -58,14 +58,27 @@ export function AdminDashboard() {
   return (
     <div className="space-y-6">
       {error ? (
-        <div className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+        <div
+          role="alert"
+          className="animate-fade-in flex items-start gap-3 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700"
+        >
+          <span
+            aria-hidden
+            className="mt-0.5 h-2 w-2 shrink-0 rounded-full bg-red-500"
+          />
           {error}
         </div>
       ) : null}
 
       {profile === undefined ? (
-        <div className="rounded-xl border border-zinc-200 bg-white p-6 text-sm text-zinc-400">
-          Loading dashboard…
+        <div className="admin-card animate-pulse p-6">
+          <div className="h-4 w-24 rounded bg-zinc-200" />
+          <div className="mt-5 space-y-3">
+            <div className="h-9 rounded-lg bg-zinc-100" />
+            <div className="h-9 rounded-lg bg-zinc-100" />
+            <div className="h-9 rounded-lg bg-zinc-100" />
+          </div>
+          <p className="sr-only">Loading dashboard…</p>
         </div>
       ) : (
         <>

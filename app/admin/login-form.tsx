@@ -2,6 +2,7 @@
 
 import { useState, type FormEvent } from "react";
 import { ADMIN_SECRET_COOKIE } from "@/lib/admin";
+import { BrandMark } from "../brand-mark";
 
 export function AdminLogin() {
   const [secret, setSecret] = useState("");
@@ -18,10 +19,13 @@ export function AdminLogin() {
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center px-4">
-      <div className="w-full max-w-sm rounded-xl border border-zinc-200 bg-white p-8 shadow-sm">
-        <h1 className="text-lg font-semibold text-zinc-900">MySpace Admin</h1>
-        <p className="mt-1 text-sm text-zinc-500">
+    <div className="flex min-h-[70vh] items-center justify-center sm:min-h-[75vh]">
+      <div className="animate-fade-up w-full max-w-sm rounded-2xl border border-zinc-200 bg-white p-8 shadow-sm shadow-zinc-200/50 sm:p-10">
+        <BrandMark />
+        <h1 className="mt-5 text-xl font-semibold tracking-tight text-zinc-900">
+          MySpace Admin
+        </h1>
+        <p className="mt-1.5 text-sm leading-relaxed text-zinc-500">
           Enter the admin secret to manage your profile and links.
         </p>
         <form onSubmit={onSubmit} className="mt-6 space-y-4">
@@ -34,12 +38,16 @@ export function AdminLogin() {
             }}
             placeholder="Admin secret"
             autoFocus
-            className="w-full rounded-lg border border-zinc-300 px-3 py-2 text-sm text-zinc-900 outline-none focus:border-zinc-500"
+            className="field"
           />
-          {error ? <p className="text-sm text-red-600">{error}</p> : null}
+          {error ? (
+            <p className="rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700">
+              {error}
+            </p>
+          ) : null}
           <button
             type="submit"
-            className="w-full rounded-lg bg-zinc-900 px-4 py-2 text-sm font-medium text-white hover:bg-zinc-700"
+            className="btn-primary w-full py-2.5"
           >
             Sign in
           </button>

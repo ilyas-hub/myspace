@@ -20,15 +20,16 @@ export const PRESETS: Preset[] = [
     name: "Mono · minimal light",
     description: "Clinical, editorial, modern — white, near-black ink, one sharp accent.",
     tokens: {
-      "--page-bg": "#fafafa",
+      "--page-bg": "linear-gradient(180deg, #fbfbfc 0%, #f3f4f6 100%)",
       "--surface": "#ffffff",
       "--fg": "#18181b",
       "--muted": "#71717a",
       "--accent": "#4f46e5",
       "--accent-ink": "#ffffff",
       "--border": "#e4e4e7",
-      "--radius": "12px",
-      "--card-shadow": "0 1px 2px rgba(0,0,0,0.04)",
+      "--radius": "16px",
+      "--card-shadow":
+        "0 1px 2px rgba(24,24,27,0.05), 0 12px 32px -12px rgba(24,24,27,0.12)",
     },
   },
   {
@@ -36,15 +37,16 @@ export const PRESETS: Preset[] = [
     name: "Midnight · dark",
     description: "Premium, techy, glow — near-black, off-white text, violet electric accent.",
     tokens: {
-      "--page-bg": "#0a0a0f",
-      "--surface": "#14141c",
+      "--page-bg": "linear-gradient(180deg, #0b0b11 0%, #07070b 100%)",
+      "--surface": "#14151e",
       "--fg": "#f4f4f5",
       "--muted": "#a1a1aa",
       "--accent": "#a78bfa",
       "--accent-ink": "#0a0a0f",
-      "--border": "#26262e",
-      "--radius": "16px",
-      "--card-shadow": "0 8px 24px rgba(0,0,0,0.35)",
+      "--border": "#262a38",
+      "--radius": "18px",
+      "--card-shadow":
+        "0 1px 0 rgba(255,255,255,0.04) inset, 0 10px 30px -10px rgba(0,0,0,0.6), 0 0 24px -12px rgba(167,139,250,0.35)",
     },
   },
   {
@@ -52,15 +54,16 @@ export const PRESETS: Preset[] = [
     name: "Warm · cozy",
     description: "Friendly, organic, creamy — cream paper, brown ink, amber accent, soft corners.",
     tokens: {
-      "--page-bg": "#fbf5e9",
+      "--page-bg": "linear-gradient(180deg, #fcf6ea 0%, #f6ecdb 100%)",
       "--surface": "#fffaf0",
       "--fg": "#292524",
       "--muted": "#78716c",
-      "--accent": "#ea580c",
+      "--accent": "#d97706",
       "--accent-ink": "#ffffff",
-      "--border": "#e7dcc8",
-      "--radius": "20px",
-      "--card-shadow": "0 2px 8px rgba(120,80,20,0.08)",
+      "--border": "#ecdfc8",
+      "--radius": "22px",
+      "--card-shadow":
+        "0 1px 2px rgba(120,80,20,0.06), 0 14px 36px -14px rgba(120,80,20,0.16)",
     },
   },
   {
@@ -69,15 +72,16 @@ export const PRESETS: Preset[] = [
     description: "Loud, energetic, branded — vivid gradient background, pill cards, white on accent.",
     tokens: {
       "--page-bg":
-        "linear-gradient(160deg,#7c3aed 0%,#db2777 55%,#f59e0b 110%)",
+        "linear-gradient(155deg,#7c3aed 0%,#db2777 55%,#f59e0b 115%)",
       "--surface": "rgba(255,255,255,0.14)",
       "--fg": "#ffffff",
-      "--muted": "rgba(255,255,255,0.82)",
+      "--muted": "rgba(255,255,255,0.85)",
       "--accent": "#ffffff",
       "--accent-ink": "#7c3aed",
-      "--border": "rgba(255,255,255,0.28)",
+      "--border": "rgba(255,255,255,0.3)",
       "--radius": "999px",
-      "--card-shadow": "0 8px 24px rgba(0,0,0,0.18)",
+      "--card-shadow":
+        "0 1px 0 rgba(255,255,255,0.25) inset, 0 12px 28px -10px rgba(0,0,0,0.35)",
     },
   },
 ];
