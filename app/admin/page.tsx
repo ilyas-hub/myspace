@@ -54,6 +54,14 @@ export default async function AdminPage() {
               </div>
             </header>
             <AdminDashboard />
+            <footer className="mt-10 text-center">
+              <Link
+                href="/builders-note"
+                className="text-sm font-medium text-zinc-400 transition hover:text-brand-600"
+              >
+                Builder&apos;s Note
+              </Link>
+            </footer>
           </>
         ) : (
           <AdminLogin />

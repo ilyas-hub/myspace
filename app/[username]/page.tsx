@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import {
@@ -176,8 +177,9 @@ export default async function PublicProfilePage({
         ) : null}
       </section>
 
-      <p
-        className="mt-auto animate-fade-in flex items-center justify-center gap-2 pt-14 text-xs font-medium tracking-wide"
+      <Link
+        href="/builders-note"
+        className="mt-auto animate-fade-in flex items-center justify-center gap-2 pt-14 text-xs font-medium tracking-wide transition hover:opacity-80"
         style={{ color: "var(--muted)", opacity: 0.7 }}
       >
         <span
@@ -186,7 +188,7 @@ export default async function PublicProfilePage({
           style={{ background: "var(--accent)" }}
         />
         Powered by MySpace
-      </p>
+      </Link>
     </main>
   );
 }
