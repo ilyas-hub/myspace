@@ -26,7 +26,7 @@ export function TrackedLink({
       onClick={track}
       target="_blank"
       rel="noopener noreferrer"
-      className="flex items-center gap-3 rounded-xl px-4 py-3"
+      className="group flex w-full items-center gap-3 rounded-xl px-4 py-3 transition duration-150 hover:-translate-y-0.5"
       style={{
         background: "var(--surface)",
         border: "1px solid var(--border)",
@@ -35,7 +35,14 @@ export function TrackedLink({
       }}
     >
       {children}
-      <span className="text-sm font-medium">{label}</span>
+      <span className="flex-1 text-left text-sm font-medium">{label}</span>
+      <span
+        aria-hidden
+        className="text-sm opacity-40 transition group-hover:opacity-100"
+        style={{ color: "var(--accent)" }}
+      >
+        {"\u2192"}
+      </span>
     </a>
   );
 }

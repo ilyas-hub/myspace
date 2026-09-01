@@ -1,10 +1,25 @@
 import Image from "next/image";
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 import {
   fetchPublicProfile,
   resolvePreset,
 } from "@/lib/public-profile";
 import { TrackedLink } from "./tracked-link";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ username: string }>;
+}): Promise<Metadata> {
+  const { username } = await params;
+  const data = await fetchPublicProfile(username);
+  if (!data) return { title: "Profile not found" };
+  return {
+    title: `${data.profile.displayName ?? username} on MySpace`,
+    description: data.profile.bio || `Links for ${username} on MySpace.`,
+  };
+}
 
 export default async function PublicProfilePage({
   params,
@@ -18,10 +33,11 @@ export default async function PublicProfilePage({
 
   const { profile, links } = data;
   const theme = resolvePreset(profile.themeId);
+  const initial = (profile.displayName ?? username).slice(0, 1).toUpperCase();
 
   return (
     <main
-      className="min-h-screen px-4 py-12"
+      className="flex min-h-screen flex-col px-4 py-12"
       style={{
         ...theme.tokens,
         background: "var(--page-bg)",
@@ -30,12 +46,16 @@ export default async function PublicProfilePage({
       }}
     >
       <section
-        className="mx-auto flex max-w-md flex-col items-center text-center"
+        className="mx-auto flex w-full max-w-md flex-col items-center text-center"
         style={{ gap: 24 }}
       >
         <div
-          className="flex h-28 w-28 items-center justify-center overflow-hidden"
-          style={{ borderRadius: "var(--radius)" }}
+          className="flex h-28 w-28 items-center justify-center overflow-hidden ring-2"
+          style={{
+            borderRadius: "var(--radius)",
+            background: "var(--surface)",
+            boxShadow: "var(--card-shadow)",
+          }}
         >
           {profile.avatarUrl ? (
             <Image
@@ -46,7 +66,12 @@ export default async function PublicProfilePage({
               className="h-full w-full object-cover"
             />
           ) : (
-            <span style={{ background: "var(--surface)" }}>{"\u2022"}</span>
+            <span
+              className="text-4xl font-semibold"
+              style={{ color: "var(--muted)" }}
+            >
+              {initial}
+            </span>
           )}
         </div>
 
@@ -55,7 +80,7 @@ export default async function PublicProfilePage({
             {profile.displayName ?? username}
           </h1>
           {profile.bio ? (
-            <p className="mt-2 text-sm" style={{ color: "var(--muted)" }}>
+            <p className="mx-auto mt-2 max-w-sm text-sm" style={{ color: "var(--muted)" }}>
               {profile.bio}
             </p>
           ) : null}
@@ -97,12 +122,12 @@ export default async function PublicProfilePage({
                   href={s.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-sm font-medium"
+                  className="text-sm font-medium transition hover:opacity-80"
                   style={{
                     color: "var(--accent-ink)",
                     background: "var(--accent)",
                     borderRadius: "999px",
-                    padding: "4px 12px",
+                    padding: "6px 14px",
                   }}
                 >
                   {s.platform}
@@ -112,6 +137,13 @@ export default async function PublicProfilePage({
           </ul>
         ) : null}
       </section>
+
+      <p
+        className="mt-auto pt-12 text-center text-xs"
+        style={{ color: "var(--muted)", opacity: 0.7 }}
+      >
+        Powered by MySpace
+      </p>
     </main>
   );
 }

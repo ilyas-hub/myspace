@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { ProfileEditor, type ProfileDraft } from "./profile-editor";
 import { LinksManager, type LinkItem } from "./links-manager";
+import { AiGenerator } from "./ai-generator";
 import { adminFetch } from "./admin-helpers";
 
 export function AdminDashboard() {
@@ -76,6 +77,9 @@ export function AdminDashboard() {
               onLinkedChanged={handleLinkedChanged}
               onError={setError}
             />
+          ) : null}
+          {profile && profileId ? (
+            <AiGenerator links={links} onError={setError} />
           ) : null}
         </>
       )}
