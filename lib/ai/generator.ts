@@ -1,6 +1,3 @@
-import { generateText } from "ai";
-import { google } from "@ai-sdk/google";
-
 export const AI_MODEL = "gemini-2.0-flash-lite";
 
 export type AiMode = "bio" | "links";
@@ -130,13 +127,31 @@ export function parseLinksResponse(
   });
 }
 
-// ── Imperative wrappers (the live AI call — mocked in tests) ────
+// The Gemini SDK is intentionally NOT imported at module scope. This file is
+// fetched by app/api/ai/route.ts at request-module load time; a static
+// `import { google } from "@ai-sdk/google"` would put the whole SDK (zod,
+// provider-utils, etc.) on the cold-start import path. If that package graph
+// fails to evaluate on a given runtime, the route module would die at load —
+// before POST or any of our logging ever runs (the "0 external requests, too
+// fast, nothing in the logs" symptom). Instead the SDK is loaded lazily, per
+// call, inside the try/catch below so any failure is caught and logged.
 
 export async function generateBio(keywords: string[]): Promise<string> {
-  const { text } = await generateText({
-    model: google(AI_MODEL),
-    prompt: buildBioPrompt(keywords),
-  });
+  let text: string;
+  try {
+    const [{ generateText }, { google }] = await Promise.all([
+      import("ai"),
+      import("@ai-sdk/google"),
+    ]);
+    const model = google(AI_MODEL);
+    ({ text } = await generateText({
+      model,
+      prompt: buildBioPrompt(keywords),
+    }));
+  } catch (err) {
+    console.error("[ai] generateBio failed (init or call):", err);
+    throw err;
+  }
 
   const bio = parseBioResponse(text);
   if (!bio) throw new Error("AI returned an empty bio.");
@@ -144,10 +159,21 @@ export async function generateBio(keywords: string[]): Promise<string> {
 }
 
 export async function generateLinkCaptions(links: LinkSeed[]): Promise<Caption[]> {
-  const { text } = await generateText({
-    model: google(AI_MODEL),
-    prompt: buildLinksPrompt(links),
-  });
+  let text: string;
+  try {
+    const [{ generateText }, { google }] = await Promise.all([
+      import("ai"),
+      import("@ai-sdk/google"),
+    ]);
+    const model = google(AI_MODEL);
+    ({ text } = await generateText({
+      model,
+      prompt: buildLinksPrompt(links),
+    }));
+  } catch (err) {
+    console.error("[ai] generateLinkCaptions failed (init or call):", err);
+    throw err;
+  }
 
   const captions = parseLinksResponse(text, links);
   if (captions.length === 0) {

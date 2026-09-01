@@ -31,7 +31,8 @@ export async function POST(request: NextRequest) {
     try {
       const bio = await generateBio(keywords);
       return NextResponse.json({ bio });
-    } catch {
+    } catch (err) {
+      console.error("[api/ai] bio generation error:", err);
       return NextResponse.json(
         { error: "AI generation failed. Try again." },
         { status: 502 },
@@ -50,7 +51,8 @@ export async function POST(request: NextRequest) {
     try {
       const captions = await generateLinkCaptions(links);
       return NextResponse.json({ captions });
-    } catch {
+    } catch (err) {
+      console.error("[api/ai] link captions generation error:", err);
       return NextResponse.json(
         { error: "AI generation failed. Try again." },
         { status: 502 },
