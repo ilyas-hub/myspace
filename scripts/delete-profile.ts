@@ -14,6 +14,7 @@
  * and prints "not found".
  */
 
+import "./dns-bootstrap";
 import mongoose from "mongoose";
 import { dbConnect } from "@/lib/db/connect";
 import { Profile, Link, Click } from "@/lib/db/models";

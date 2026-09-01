@@ -9,6 +9,7 @@
  * that backs the demo. Reads MONGODB_URI from the environment / .env.local.
  */
 
+import "./dns-bootstrap";
 import mongoose from "mongoose";
 import { dbConnect } from "@/lib/db/connect";
 import { Profile, Link } from "@/lib/db/models";
@@ -60,7 +61,7 @@ async function main() {
   const profile = await Profile.findOneAndUpdate(
     { username: SEEDED_USERNAME },
     { $set: PROFILE },
-    { new: true, upsert: true, runValidators: true },
+    { returnDocument: "after", upsert: true, runValidators: true },
   );
 
   if (!profile) throw new Error("Could not seed profile.");
