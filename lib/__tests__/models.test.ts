@@ -71,6 +71,22 @@ describe("Profile model", () => {
   it("accepts none of the optional fields", async () => {
     await expectValid(new Profile({ username: "alex" }));
   });
+
+  it("accepts optional featuredImageUrl and featuredText", async () => {
+    await expectValid(
+      new Profile({
+        ...validProfile(),
+        featuredImageUrl: "https://store.public.blob.vercel-storage.com/feat.png",
+        featuredText: "Check out my new single!",
+      }),
+    );
+  });
+
+  it("allows profile without featured fields to remain null", async () => {
+    const p = new Profile(validProfile());
+    expect(p.featuredImageUrl).toBeUndefined();
+    expect(p.featuredText).toBeUndefined();
+  });
 });
 
 describe("Link model", () => {

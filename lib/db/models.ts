@@ -17,6 +17,8 @@ const profileSchema = new Schema(
       ],
       default: [],
     },
+    featuredImageUrl: { type: String },
+    featuredText: { type: String, trim: true },
   },
 );
 

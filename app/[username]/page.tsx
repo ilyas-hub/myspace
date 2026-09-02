@@ -108,6 +108,32 @@ export default async function PublicProfilePage({
           ) : null}
         </div>
 
+        {profile.featuredImageUrl && profile.featuredText ? (
+          <div
+            className="animate-fade-up w-full overflow-hidden rounded-2xl sm:max-w-md"
+            style={{
+              background: "var(--surface)",
+              border: "1px solid var(--border)",
+              boxShadow: "var(--card-shadow)",
+              animationDelay: "120ms",
+            }}
+          >
+            <Image
+              src={profile.featuredImageUrl}
+              alt={profile.featuredText}
+              width={512}
+              height={256}
+              className="h-40 w-full object-cover"
+            />
+            <p
+              className="px-4 py-3 text-sm leading-relaxed"
+              style={{ color: "var(--fg)" }}
+            >
+              {profile.featuredText}
+            </p>
+          </div>
+        ) : null}
+
         {links.length > 0 ? (
           <ul
             className="animate-fade-up flex w-full flex-col"

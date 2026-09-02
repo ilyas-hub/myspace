@@ -15,6 +15,8 @@ export interface ProfileDraft {
   bio: string;
   avatarUrl: string;
   themeId: string;
+  featuredImageUrl: string;
+  featuredText: string;
 }
 
 interface Props {
@@ -25,7 +27,7 @@ interface Props {
 
 export function ProfileEditor({ profile, onSaved, onError }: Props) {
   const [draft, setDraft] = useState<ProfileDraft>(
-    profile ?? { username: "", displayName: "", bio: "", avatarUrl: "", themeId: "mono" },
+    profile ?? { username: "", displayName: "", bio: "", avatarUrl: "", themeId: "mono", featuredImageUrl: "", featuredText: "" },
   );
   const [saving, setSaving] = useState(false);
   const [uploading, setUploading] = useState(false);
@@ -181,6 +183,33 @@ export function ProfileEditor({ profile, onSaved, onError }: Props) {
                 </button>
               ) : null}
             </div>
+          </div>
+        </div>
+
+        <div>
+          <span className="text-sm font-medium text-zinc-700">Featured content</span>
+          <p className="mt-1 text-xs text-zinc-400">
+            Optional image + text block shown on your public page above the links.
+          </p>
+          <div className="mt-3 space-y-3">
+            <label className="block">
+              <span className="text-xs font-medium text-zinc-600">Image URL</span>
+              <input
+                value={draft.featuredImageUrl}
+                onChange={(e) => setDraft({ ...draft, featuredImageUrl: e.target.value })}
+                placeholder="https://…"
+                className="field mt-1"
+              />
+            </label>
+            <label className="block">
+              <span className="text-xs font-medium text-zinc-600">Caption text</span>
+              <input
+                value={draft.featuredText}
+                onChange={(e) => setDraft({ ...draft, featuredText: e.target.value })}
+                placeholder="e.g. Check out my new single!"
+                className="field mt-1"
+              />
+            </label>
           </div>
         </div>
 

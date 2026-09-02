@@ -5,6 +5,7 @@ import { ProfileEditor, type ProfileDraft } from "./profile-editor";
 import { LinksManager, type LinkItem } from "./links-manager";
 import { AiGenerator } from "./ai-generator";
 import { adminFetch } from "./admin-helpers";
+import { interpretClicks, buildInsightCta } from "@/lib/click-insights";
 
 export function AdminDashboard() {
   const [profile, setProfile] = useState<ProfileDraft | null | undefined>(undefined);
@@ -83,6 +84,9 @@ export function AdminDashboard() {
       ) : (
         <>
           <ProfileEditor profile={profile} onSaved={handleSaved} onError={setError} />
+          {links.length > 0 ? (
+            <InsightsCard links={links} />
+          ) : null}
           {profile && profileId ? (
             <LinksManager
               profileId={profileId}
@@ -97,5 +101,39 @@ export function AdminDashboard() {
         </>
       )}
     </div>
+  );
+}
+
+function InsightsCard({ links }: { links: LinkItem[] }) {
+  const clickableLinks = links
+    .filter((l) => l.clickCount !== undefined)
+    .map((l) => ({ _id: l._id, label: l.label, clickCount: l.clickCount as number }));
+
+  const interpretation = interpretClicks(clickableLinks);
+  const cta = buildInsightCta(clickableLinks);
+
+  if (!interpretation && !cta) return null;
+
+  return (
+    <section className="admin-card p-6 sm:p-8">
+      <div className="flex items-center gap-2">
+        <span className="h-2 w-2 rounded-full bg-brand-500" />
+        <h2 className="text-sm font-semibold uppercase tracking-wide text-zinc-500">
+          Insights
+        </h2>
+      </div>
+      <div className="mt-5 space-y-3">
+        {interpretation ? (
+          <p className="text-sm leading-relaxed text-zinc-700">
+            {interpretation}
+          </p>
+        ) : null}
+        {cta ? (
+          <p className="rounded-xl border border-brand-100 bg-brand-50/60 px-4 py-3.5 text-sm leading-relaxed text-zinc-800">
+            {cta}
+          </p>
+        ) : null}
+      </div>
+    </section>
   );
 }
