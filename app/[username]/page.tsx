@@ -38,7 +38,7 @@ export default async function PublicProfilePage({
 
   return (
     <main
-      className="relative isolate flex min-h-screen flex-col overflow-hidden px-5 py-12 sm:px-8 sm:py-16"
+      className="relative isolate flex min-h-screen flex-col overflow-visible md:overflow-hidden md:h-dvh px-4 py-8 sm:px-6 sm:py-10 md:px-8"
       style={{
         ...theme.tokens,
         background: "var(--page-bg)",
@@ -56,8 +56,7 @@ export default async function PublicProfilePage({
       />
 
       <section
-        className="mx-auto flex w-full max-w-md flex-col items-center text-center sm:max-w-lg"
-        style={{ gap: 32 }}
+        className="mx-auto flex w-full max-w-md flex-col items-center text-center sm:max-w-lg gap-5 md:gap-4"
       >
         <div
           className="animate-fade-up rounded-full"
@@ -69,7 +68,7 @@ export default async function PublicProfilePage({
           }}
         >
           <div
-            className="h-24 w-24 overflow-hidden rounded-full sm:h-28 sm:w-28"
+            className="h-20 w-20 overflow-hidden rounded-full sm:h-24 sm:w-24 md:h-24 md:w-24"
             style={{
               background: "var(--surface)",
               border: "1px solid var(--border)",
@@ -79,13 +78,13 @@ export default async function PublicProfilePage({
               <Image
                 src={profile.avatarUrl}
                 alt={`${profile.displayName ?? username} avatar`}
-                width={112}
-                height={112}
+                width={96}
+                height={96}
                 className="h-full w-full object-cover"
               />
             ) : (
               <span
-                className="flex h-full w-full items-center justify-center text-4xl font-semibold sm:text-5xl"
+                className="flex h-full w-full items-center justify-center text-3xl font-semibold sm:text-4xl md:text-4xl"
                 style={{ color: "var(--accent)" }}
               >
                 {initial}
@@ -95,12 +94,12 @@ export default async function PublicProfilePage({
         </div>
 
         <div className="animate-fade-up" style={{ animationDelay: "80ms" }}>
-          <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">
+          <h1 className="text-2xl font-bold tracking-tight sm:text-3xl md:text-3xl">
             {profile.displayName ?? username}
           </h1>
           {profile.bio ? (
             <p
-              className="mx-auto mt-3 max-w-sm text-sm leading-relaxed sm:max-w-md sm:text-base"
+              className="mx-auto mt-2 max-w-sm text-sm leading-relaxed sm:max-w-md sm:text-base"
               style={{ color: "var(--muted)" }}
             >
               {profile.bio}
@@ -123,10 +122,10 @@ export default async function PublicProfilePage({
               alt={profile.featuredText}
               width={512}
               height={256}
-              className="h-40 w-full object-cover"
+              className="h-28 md:h-24 w-full object-cover"
             />
             <p
-              className="px-4 py-3 text-sm leading-relaxed"
+              className="px-3 py-2 md:px-4 md:py-3 text-sm leading-relaxed"
               style={{ color: "var(--fg)" }}
             >
               {profile.featuredText}
@@ -136,9 +135,8 @@ export default async function PublicProfilePage({
 
         {links.length > 0 ? (
           <ul
-            className="animate-fade-up flex w-full flex-col"
+            className="animate-fade-up flex w-full flex-col gap-3 md:gap-4"
             style={{
-              gap: 14,
               listStyle: "none",
               margin: 0,
               padding: 0,
@@ -169,9 +167,8 @@ export default async function PublicProfilePage({
 
         {profile.socials?.length ? (
           <ul
-            className="animate-fade-up flex flex-wrap items-center justify-center"
+            className="animate-fade-up flex flex-wrap items-center justify-center gap-2 md:gap-2.5"
             style={{
-              gap: 10,
               listStyle: "none",
               margin: 0,
               padding: 0,
@@ -205,7 +202,7 @@ export default async function PublicProfilePage({
 
       <Link
         href="/builders-note"
-        className="mt-auto animate-fade-in flex items-center justify-center gap-2 pt-14 text-xs font-medium tracking-wide transition hover:opacity-80"
+        className="mt-auto animate-fade-in flex items-center justify-center gap-2 pt-8 md:pt-10 text-xs font-medium tracking-wide transition hover:opacity-80"
         style={{ color: "var(--muted)", opacity: 0.7 }}
       >
         <span

@@ -26,7 +26,7 @@ export function TrackedLink({
       onClick={track}
       target="_blank"
       rel="noopener noreferrer"
-      className="group flex w-full items-center gap-3 rounded-2xl py-3 pl-3 pr-4 transition duration-200 hover:-translate-y-0.5 sm:gap-4 sm:py-4 sm:pl-4"
+      className="group flex w-full items-center gap-3 rounded-2xl py-3 pl-3 pr-4 transition duration-200 hover:-translate-y-0.5 sm:py-4 sm:pl-4 sm:pr-4 sm:gap-4 md:py-2 md:pl-3 md:pr-4 md:gap-3"
       style={{
         background: "var(--surface)",
         border: "1px solid var(--border)",
