@@ -63,14 +63,14 @@ describe("buildInsightCta", () => {
   it("returns a CTA suggesting to feature the top link higher", () => {
     const links = [link("Store", 12), link("Music", 3)];
     expect(buildInsightCta(links)).toBe(
-      'Most clicks go to Store — consider featuring it higher.',
+      'Most clicks go to Store  consider featuring it higher.',
     );
   });
 
   it("handles a single link with clicks", () => {
     const links = [link("Only", 1)];
     expect(buildInsightCta(links)).toBe(
-      'Most clicks go to Only — consider featuring it higher.',
+      'Most clicks go to Only  consider featuring it higher.',
     );
   });
 });

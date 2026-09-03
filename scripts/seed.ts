@@ -1,5 +1,5 @@
 /**
- * Seed script — furnishes the demo profile so the public page looks
+ * Seed script  furnishes the demo profile so the public page looks
  * complete for the product preview video.
  *
  * Usage: npm run seed

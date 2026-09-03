@@ -1,5 +1,5 @@
 /**
- * One-off cleanup — deletes a profile by username together with all of its
+ * One-off cleanup  deletes a profile by username together with all of its
  * links and clicks (a safe cascade), so a profile with a wrong/unsaved
  * username can be removed and the demo re-seeded correctly.
  *
@@ -40,7 +40,7 @@ async function main() {
 
   const profile = await Profile.findOne({ username });
   if (!profile) {
-    console.log(`No profile found for username "${username}" — nothing to delete.`);
+    console.log(`No profile found for username "${username}"  nothing to delete.`);
     await mongoose.disconnect();
     return;
   }

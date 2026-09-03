@@ -131,7 +131,7 @@ export function parseLinksResponse(
 // fetched by app/api/ai/route.ts at request-module load time; a static
 // `import { google } from "@ai-sdk/google"` would put the whole SDK (zod,
 // provider-utils, etc.) on the cold-start import path. If that package graph
-// fails to evaluate on a given runtime, the route module would die at load —
+// fails to evaluate on a given runtime, the route module would die at load 
 // before POST or any of our logging ever runs (the "0 external requests, too
 // fast, nothing in the logs" symptom). Instead the SDK is loaded lazily, per
 // call, inside the try/catch below so any failure is caught and logged.

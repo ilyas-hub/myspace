@@ -95,7 +95,7 @@ export function ProfileEditor({ profile, onSaved, onError }: Props) {
         </p>
       ) : (
         <p className="mt-1.5 text-xs text-zinc-400">
-          No profile yet — create one to get a public page.
+          No profile yet  create one to get a public page.
         </p>
       )}
 
@@ -119,7 +119,7 @@ export function ProfileEditor({ profile, onSaved, onError }: Props) {
             </p>
           ) : (
             <p className="mt-1.5 text-xs text-zinc-400">
-              Used in your public URL — letters, numbers, . _ - only (no spaces).
+              Used in your public URL  letters, numbers, . _ - only (no spaces).
             </p>
           )}
         </label>

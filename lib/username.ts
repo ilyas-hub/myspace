@@ -1,6 +1,6 @@
 // Username is the public URL key (app/[username]). It must be valid in a
 // URL path (letters, digits, and the path-safe separators) and not contain
-// whitespace — a username such as "Mohd Ilyas Shaikh" would otherwise produce
+// whitespace  a username such as "Mohd Ilyas Shaikh" would otherwise produce
 // an ugly, hard-to-share `/[username]` URL.
 
 export type UsernameError =

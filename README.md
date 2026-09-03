@@ -1,4 +1,4 @@
-# MySpace — link-in-bio demo
+# MySpace  link-in-bio demo
 
 A personalized link-in-bio tool for creators. Single-admin, deployable on
 Vercel's free tier (Hobby) with MongoDB Atlas M0, Vercel Blob, and the Google

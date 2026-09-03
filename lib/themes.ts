@@ -10,7 +10,7 @@ export interface Preset {
 // Validated theme presets (theming ticket 03). A profile stores a
 // `themeId`; the public page applies that preset's CSS-variable tokens.
 // `mono` is the DEFAULT theme. All four are provisional pending Air Media's
-// brief (their brand may dictate colors) — presets are code data, not a DB
+// brief (their brand may dictate colors)  presets are code data, not a DB
 // collection, so adjusting them is a one-file change.
 export const DEFAULT_THEME_ID = "mono";
 
@@ -18,7 +18,7 @@ export const PRESETS: Preset[] = [
   {
     id: "mono",
     name: "Mono · minimal light",
-    description: "Clinical, editorial, modern — white, near-black ink, one sharp accent.",
+    description: "Clinical, editorial, modern  white, near-black ink, one sharp accent.",
     tokens: {
       "--page-bg": "linear-gradient(180deg, #fbfbfc 0%, #f3f4f6 100%)",
       "--surface": "#ffffff",
@@ -35,7 +35,7 @@ export const PRESETS: Preset[] = [
   {
     id: "midnight",
     name: "Midnight · dark",
-    description: "Premium, techy, glow — near-black, off-white text, violet electric accent.",
+    description: "Premium, techy, glow  near-black, off-white text, violet electric accent.",
     tokens: {
       "--page-bg": "linear-gradient(180deg, #0b0b11 0%, #07070b 100%)",
       "--surface": "#14151e",
@@ -52,7 +52,7 @@ export const PRESETS: Preset[] = [
   {
     id: "warm",
     name: "Warm · cozy",
-    description: "Friendly, organic, creamy — cream paper, brown ink, amber accent, soft corners.",
+    description: "Friendly, organic, creamy  cream paper, brown ink, amber accent, soft corners.",
     tokens: {
       "--page-bg": "linear-gradient(180deg, #fcf6ea 0%, #f6ecdb 100%)",
       "--surface": "#fffaf0",
@@ -69,7 +69,7 @@ export const PRESETS: Preset[] = [
   {
     id: "punch",
     name: "Punch · bold gradient",
-    description: "Loud, energetic, branded — vivid gradient background, pill cards, white on accent.",
+    description: "Loud, energetic, branded  vivid gradient background, pill cards, white on accent.",
     tokens: {
       "--page-bg":
         "linear-gradient(155deg,#7c3aed 0%,#db2777 55%,#f59e0b 115%)",

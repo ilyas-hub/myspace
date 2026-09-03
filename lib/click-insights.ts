@@ -49,5 +49,5 @@ export function buildInsightCta(links: ClickableLink[]): string | null {
   const summary = summarize(links);
   if (!summary) return null;
 
-  return `Most clicks go to ${summary.topLabel} — consider featuring it higher.`;
+  return `Most clicks go to ${summary.topLabel}  consider featuring it higher.`;
 }

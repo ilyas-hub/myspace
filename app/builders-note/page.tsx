@@ -12,24 +12,24 @@ const sections = [
   {
     heading: "Where things started",
     body: [
-      "The app already had a solid foundation: a themed public profile page, a single-admin dashboard behind a secret, a Mongoose layer, click tracking, and an AI copy route backed by Google Gemini. The AI route was the one thing actively broken — every /api/ai request returned 502 and the logs showed 404 NOT_FOUND from the model endpoint.",
+      "The app already had a solid foundation: a themed public profile page, a single-admin dashboard behind a secret, a Mongoose layer, click tracking, and an AI copy route backed by Google Gemini. The AI route was the one thing actively broken  every /api/ai request returned 502 and the logs showed 404 NOT_FOUND from the model endpoint.",
     ],
   },
   {
     heading: "Fixing the live bug before making things pretty",
     body: [
-      "The root cause was a retired model: the deployed build was calling gemini-2.0-flash-lite, which Google had removed from the API. I updated the generator to gemini-3.5-flash-lite, committed, and pushed so Vercel would redeploy — production was green before I touched a pixel. Fixing production issues before cosmetic work is a default I stick to.",
+      "The root cause was a retired model: the deployed build was calling gemini-2.0-flash-lite, which Google had removed from the API. I updated the generator to gemini-3.5-flash-lite, committed, and pushed so Vercel would redeploy  production was green before I touched a pixel. Fixing production issues before cosmetic work is a default I stick to.",
     ],
   },
   {
     heading: "The UI/UX pass",
     body: [
-      "Direction, decided up front: “modern polished neutral” — refined zinc neutrals, one strong indigo accent, soft shadows, larger touch targets, better spacing, clean SaaS feel. Then applied across every page:",
+      "Direction, decided up front: “modern polished neutral”  refined zinc neutrals, one strong indigo accent, soft shadows, larger touch targets, better spacing, clean SaaS feel. Then applied across every page:",
     ],
     list: [
       "Design system in one file. globals.css now carries the brand palette, accessible focus rings, fade animations that respect prefers-reduced-motion, and reusable utilities: admin-card, field, btn-primary, btn-secondary.",
       "Public profile. Avatar with an accent halo, a soft decorative glow, larger responsive typography, animated social pills and link cards, and breakpoints that reflow from phone to tablet to desktop.",
-      "Theme presets polished, not redrawn. Same four theme IDs and the same token contract — but deeper shadows, gradient page washes, and refined radii. Existing profiles keep working; no stored data or schema change.",
+      "Theme presets polished, not redrawn. Same four theme IDs and the same token contract  but deeper shadows, gradient page washes, and refined radii. Existing profiles keep working; no stored data or schema change.",
       "Admin surface. Branded header with an M mark, card-based layout, a wider responsive container, a login card, and a skeleton loading state. The profile editor's theme picker now shows live color swatches for each preset. The links manager turns wide rows into stacked cards on mobile, with click-count badges. The AI copywriter results got styled treatment.",
       "Branded 404 for the not-found case that didn't exist before.",
     ],
@@ -37,12 +37,12 @@ const sections = [
   {
     heading: "Craft notes and tradeoffs",
     body: [
-      "Scope discipline — the UI pass is visual-only; no behaviour, API, or data changes. The one non-visual item was deliberately undoing an unintended dark-mode shell removal I'd introduced mid-refactor.",
-      "Polish over rebuild — the themes were enhanced in place rather than reimagined, so “improve design” didn't silently change what a user who chose Midnight sees.",
-      "Responsiveness is structural — every form, toolbar, and card stacks, wraps, or reflows rather than squeezing; interactive targets stay comfortable to tap.",
-      "Accessibility was treated as part of the design — keyboard focus rings, reduced-motion support, aria-hidden on decorative marks, sr-only text for the loading state.",
-      "Avoided a fragile Tailwind idiom — the brand palette is plainly-named CSS variables in :root, aliased into Tailwind's --color-brand-* namespace via @theme inline, not a self-referential mapping that only works by cascade luck. Verified in the compiled CSS output.",
-      "Deduplicated where duplication was real — a shared BrandMark component and btn-* utilities replaced copy-pasted badges and button class strings.",
+      "Scope discipline  the UI pass is visual-only; no behaviour, API, or data changes. The one non-visual item was deliberately undoing an unintended dark-mode shell removal I'd introduced mid-refactor.",
+      "Polish over rebuild  the themes were enhanced in place rather than reimagined, so “improve design” didn't silently change what a user who chose Midnight sees.",
+      "Responsiveness is structural  every form, toolbar, and card stacks, wraps, or reflows rather than squeezing; interactive targets stay comfortable to tap.",
+      "Accessibility was treated as part of the design  keyboard focus rings, reduced-motion support, aria-hidden on decorative marks, sr-only text for the loading state.",
+      "Avoided a fragile Tailwind idiom  the brand palette is plainly-named CSS variables in :root, aliased into Tailwind's --color-brand-* namespace via @theme inline, not a self-referential mapping that only works by cascade luck. Verified in the compiled CSS output.",
+      "Deduplicated where duplication was real  a shared BrandMark component and btn-* utilities replaced copy-pasted badges and button class strings.",
     ],
   },
   {
@@ -50,7 +50,7 @@ const sections = [
     body: [],
     list: [
       "Ship a real favicon / app icon (the default Next.js one is still there) and an OG image per profile for richer link previews.",
-      "E2E tests with Playwright — the unit tests cover logic seams well, but they never click real buttons.",
+      "E2E tests with Playwright  the unit tests cover logic seams well, but they never click real buttons.",
       "A live “preview” toggle in the admin so theme choices can be seen against real content before saving.",
       "Skeleton loaders per admin section instead of one placeholder card.",
       "Drag-and-drop reordering for links (native HTML5, no dependency).",
